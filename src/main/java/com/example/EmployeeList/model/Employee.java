@@ -14,11 +14,9 @@ public class Employee {
 
     private String name;
 
-    public Employee(Long id, String name) {
-        Id = id;
-        this.name = name;
-    }
-
+    @ManyToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="category_id")
+    private EmployeeCategory employeeCategory;
 
     public Long getId() {
         return Id;
@@ -37,4 +35,11 @@ public class Employee {
     }
 
 
+    public EmployeeCategory getEmployeeCategory() {
+        return employeeCategory;
+    }
+
+    public void setEmployeeCategory(EmployeeCategory employeeCategory) {
+        this.employeeCategory = employeeCategory;
+    }
 }

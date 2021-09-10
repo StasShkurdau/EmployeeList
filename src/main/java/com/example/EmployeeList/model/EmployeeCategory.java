@@ -20,12 +20,6 @@ public class EmployeeCategory {
     @JoinColumn(name = "category_id")
     private List<Employee> employees;
 
-    public EmployeeCategory(Long id, String name, List<Employee> employees) {
-        Id = id;
-        this.name = name;
-        this.employees = employees;
-    }
-
     public Long getId() {
         return Id;
     }
