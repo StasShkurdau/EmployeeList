@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 import static java.util.Objects.isNull;
 
 @RestController
-@RequestMapping("/api/v1/employee")
+@RequestMapping("/api/v1/main")
 public class MainController {
 
     private final Service service;

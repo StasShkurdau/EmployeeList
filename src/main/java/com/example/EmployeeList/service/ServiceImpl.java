@@ -8,6 +8,7 @@ import com.example.EmployeeList.repository.EmployeeCategoryRepository;
 import com.example.EmployeeList.repository.EmployeeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +20,9 @@ import static java.util.Objects.isNull;
 @Transactional
 public class ServiceImpl implements Service {
 
+    @Autowired
     private final EmployeeCategoryRepository employeeCategoryRepository;
+    @Autowired
     private final EmployeeRepository employeeRepository;
 
 
