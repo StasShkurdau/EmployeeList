@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/api/v1/auth/")
+@RequestMapping(value = "/api/v1/auth")
 public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
@@ -35,11 +35,12 @@ public class AuthenticationController {
         this.userService = userService;
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity login(@RequestBody AuthenticationRequestDTO requestDto) {
         try {
             String username = requestDto.getUsername();
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
+            String password = requestDto.getPassword();
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             User user = userService.findByUsername(username);
 
             if (user == null) {
@@ -56,5 +57,13 @@ public class AuthenticationController {
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username or password");
         }
+    }
+
+    @PostMapping("/register")
+    public void register(@RequestBody AuthenticationRequestDTO requestDto){
+        User user = new User();
+        user.setPassword(requestDto.getPassword());
+        user.setUsername(requestDto.getUsername());
+        userService.register(user);
     }
 }

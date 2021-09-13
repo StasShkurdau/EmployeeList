@@ -1,10 +1,12 @@
 package com.example.EmployeeList.model;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Role {
+public class Role{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,4 +41,5 @@ public class Role {
     public void setUsers(List<User> users) {
         this.users = users;
     }
+
 }
