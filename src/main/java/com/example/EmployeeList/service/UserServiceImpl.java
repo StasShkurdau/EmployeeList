@@ -1,6 +1,7 @@
 package com.example.EmployeeList.service;
 
 import com.example.EmployeeList.model.Role;
+import com.example.EmployeeList.model.Status;
 import com.example.EmployeeList.model.User;
 import com.example.EmployeeList.repository.RoleRepository;
 import com.example.EmployeeList.repository.UserRepository;
@@ -37,12 +38,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(User user) {
-        Role roleUser = roleRepository.findByName("ROLE_USER");
+        Role roleUser = roleRepository.findByName("ADMIN");
         List<Role> userRoles = new ArrayList<>();
         userRoles.add(roleUser);
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles(userRoles);
+        user.setStatus(Status.ACTIVE);
         User registeredUser = userRepository.save(user);
 
         LOGGER.info("In register method registered user : " + registeredUser);

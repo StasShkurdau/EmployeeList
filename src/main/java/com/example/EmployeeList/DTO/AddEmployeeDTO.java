@@ -4,7 +4,7 @@ public class AddEmployeeDTO {
 
     private String name;
 
-    private  String categoryName;
+    private  String category;
 
     public String getName() {
         return name;
@@ -15,10 +15,10 @@ public class AddEmployeeDTO {
     }
 
     public String getCategoryName() {
-        return categoryName;
+        return category;
     }
 
     public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+        this.category = categoryName;
     }
 }

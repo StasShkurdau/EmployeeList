@@ -26,7 +26,7 @@ class EmployeeListLoginTests {
 
 	@Autowired
 	private MainController controller;
-
+/*
 	@Test
 	void contextLoads() throws Exception {
 		this.mockMvc.perform(get("/api/v1/main"))
@@ -34,24 +34,8 @@ class EmployeeListLoginTests {
 				.andExpect(status().isOk());
 	}
 
-	@Test
-	public void accessDeniedTest() throws Exception {
-		this.mockMvc.perform(post("/api/v1/auth/login"))
-				.andDo(print())
-				.andExpect(status().is4xxClientError());
-	}
 
-	@Test
-	public void correctLoginTest() throws Exception {
-		this.mockMvc.perform(formLogin().user("dru").password("1"))
-				.andExpect(status().is3xxRedirection());
-	}
+ */
 
-	@Test
-	public void badCredentials() throws Exception {
-		this.mockMvc.perform(post("/api/v1/auth/addEmployee").param("Mike", "Rabotyaga"))
-				.andDo(print())
-				.andExpect(status().isOk());
-	}
 }
 

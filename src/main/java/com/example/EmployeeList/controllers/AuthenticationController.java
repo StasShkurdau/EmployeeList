@@ -1,6 +1,7 @@
 package com.example.EmployeeList.controllers;
 
 import com.example.EmployeeList.DTO.AuthenticationRequestDTO;
+import com.example.EmployeeList.model.Role;
 import com.example.EmployeeList.model.User;
 import com.example.EmployeeList.security.jwt.JwtTokenProvider;
 import com.example.EmployeeList.service.UserService;
@@ -9,12 +10,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,9 +42,12 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody AuthenticationRequestDTO requestDto) {
         try {
+            Authentication authentication = new UsernamePasswordAuthenticationToken(
+                    requestDto.getUsername(),
+                    requestDto.getPassword()
+            );
             String username = requestDto.getUsername();
-            String password = requestDto.getPassword();
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            authenticationManager.authenticate(authentication);
             User user = userService.findByUsername(username);
 
             if (user == null) {
@@ -65,5 +72,6 @@ public class AuthenticationController {
         user.setPassword(requestDto.getPassword());
         user.setUsername(requestDto.getUsername());
         userService.register(user);
+
     }
 }
